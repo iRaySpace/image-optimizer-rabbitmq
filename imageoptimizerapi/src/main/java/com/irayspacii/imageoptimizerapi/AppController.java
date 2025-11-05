@@ -17,14 +17,10 @@ public class AppController {
     @Autowired
     private AppService appService;
 
-    @PostMapping("/store")
-    public ResponseEntity store(@RequestBody byte[] imageData, HttpServletRequest request) throws Exception {
-        final String storeKey = appService.store(imageData);
-        return ResponseEntity.created(URI.create("/download/" + storeKey)).build();
+    @PostMapping("/process")
+    public ResponseEntity process(@RequestBody byte[] imageData) throws Exception {
+        final String storeKey = appService.process(imageData);
+        return ResponseEntity.created(URI.create(storeKey)).build();
     }
 
-    @PostMapping("/process")
-    public void process(@RequestBody AppDto data) {
-        System.out.println(data);
-    }
 }
